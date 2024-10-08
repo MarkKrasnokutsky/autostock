@@ -17,7 +17,7 @@ public class AutomobileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_Автомобиля", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "Тип_Кузова", nullable = false, length = 32)
     private String type;
