@@ -1,10 +1,10 @@
-package com.mark.autostock.service;
+package com.mark.autostock.service.impl;
 
 import com.mark.autostock.config.JwtCore;
-import com.mark.autostock.dto.SigninRequest;
-import com.mark.autostock.dto.SignupRequest;
-import com.mark.autostock.dto.TokenRefreshResponse;
-import com.mark.autostock.dto.TokenResponse;
+import com.mark.autostock.dto.request.SigninRequest;
+import com.mark.autostock.dto.request.SignupRequest;
+import com.mark.autostock.dto.response.TokenRefreshResponse;
+import com.mark.autostock.dto.response.TokenResponse;
 import com.mark.autostock.entity.UserEntity;
 import com.mark.autostock.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -39,7 +39,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class SecurityService {
+public class SecurityServiceImpl {
     private final UserDetailsService userDetailsService;
     @Value("${jwt-token.secret}")
     private String secret;
