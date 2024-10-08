@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AutomobileRepository extends JpaRepository<AutomobileEntity, Integer> {
+public interface AutomobileRepository extends JpaRepository<AutomobileEntity, Long> {
 
     @Query(value = "SELECT * FROM autostock.`автомобиль`", entity = AutomobileEntity.class)
     List<AutomobileEntity> findAll();

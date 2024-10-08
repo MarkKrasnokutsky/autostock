@@ -1,8 +1,8 @@
 package com.mark.autostock.controller;
 
-import com.mark.autostock.dto.SigninRequest;
-import com.mark.autostock.dto.SignupRequest;
-import com.mark.autostock.service.SecurityService;
+import com.mark.autostock.dto.request.SigninRequest;
+import com.mark.autostock.dto.request.SignupRequest;
+import com.mark.autostock.service.impl.SecurityServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -19,20 +19,20 @@ import java.io.IOException;
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class SecurityController {
-    private final SecurityService securityService;
+    private final SecurityServiceImpl securityServiceImpl;
 
     @PostMapping("/signup")
     ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signupRequest) throws IOException {
-        return securityService.register(signupRequest);
+        return securityServiceImpl.register(signupRequest);
     }
 
     @PostMapping("/signin")
     ResponseEntity<?> signin(@Valid @RequestBody SigninRequest signinRequest,
                              HttpServletResponse response) {
-        return securityService.login(signinRequest, response);
+        return securityServiceImpl.login(signinRequest, response);
     }
     @PostMapping("/refresh_token")
     public ResponseEntity<?> refresh(HttpServletRequest request, HttpServletResponse response) {
-        return securityService.refresh(request, response);
+        return securityServiceImpl.refresh(request, response);
     }
 }

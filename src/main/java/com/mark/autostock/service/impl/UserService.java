@@ -1,16 +1,13 @@
-package com.mark.autostock.service;
+package com.mark.autostock.service.impl;
 
 import com.mark.autostock.config.UserDetailsImpl;
 import com.mark.autostock.entity.UserEntity;
 import com.mark.autostock.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {

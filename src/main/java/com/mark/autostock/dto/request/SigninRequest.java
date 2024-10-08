@@ -1,11 +1,11 @@
-package com.mark.autostock.dto;
+package com.mark.autostock.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class SignupRequest {
+public class SigninRequest {
     /**
      *  Логин пользователя должен быть длиной не менее, чем 4 символа, состоять из латинских букв,
      *  цифр и нижних подчёркиваний
@@ -22,15 +22,4 @@ public class SignupRequest {
     @NotBlank(message = "Пароль пользователя не может быть пустой")
     @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,40})", message = "Некорректный пароль")
     private String password;
-    /**
-     * Критерии валидации email:
-     * - Начало: любой символ из набора буквы, цифры, . _ % +
-     * - Содержит: символ @
-     * - Домен: буквы, цифры, дефис
-     * - Заканчивается точкой
-     * - Окончание: от 2 буквенных или цифровых символов
-     * */
-    @NotBlank(message = "Почта не может быть пустой")
-    @Pattern(regexp = "([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9_-]+)", message = "Некорректный email")
-    private String email;
 }

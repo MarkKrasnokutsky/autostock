@@ -1,6 +1,6 @@
 package com.mark.autostock.config;
 
-import com.mark.autostock.service.UserService;
+import com.mark.autostock.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
