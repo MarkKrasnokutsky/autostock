@@ -1,4 +1,4 @@
-package com.mark.autostock.entity;
+package com.mark.autostock.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

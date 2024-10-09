@@ -1,4 +1,4 @@
-package com.mark.autostock.dto.response;
+package com.mark.autostock.domain.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TokenResponse {
-    private String token;
+public class TokenRefreshRequest {
     private String refreshToken;
 }

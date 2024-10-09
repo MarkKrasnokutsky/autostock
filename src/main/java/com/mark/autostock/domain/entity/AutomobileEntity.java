@@ -1,15 +1,21 @@
-package com.mark.autostock.entity;
+package com.mark.autostock.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "автомобиль", schema = "autostock")
@@ -53,4 +59,9 @@ public class AutomobileEntity {
 
     @Column(name = "Статус", nullable = false, length = 32)
     private String status;
+
+    @JsonManagedReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "automobile")
+    private List<SellEntity> sells; // Связь с продажами
 }

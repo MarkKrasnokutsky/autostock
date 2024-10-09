@@ -1,5 +1,5 @@
 CREATE TABLE `autostock`.`предзаказ` (
-                                         `Номер_Предзаказа` INT NOT NULL,
+                                         `Номер_Предзаказа` INT NOT NULL AUTO_INCREMENT,
                                          `Тип_Кузова` VARCHAR(32) NOT NULL,
                                          `Марка` VARCHAR(128) NOT NULL,
                                          `Модель` VARCHAR(128) NOT NULL,
