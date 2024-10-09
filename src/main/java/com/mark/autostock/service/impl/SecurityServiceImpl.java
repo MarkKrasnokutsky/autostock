@@ -1,11 +1,11 @@
 package com.mark.autostock.service.impl;
 
 import com.mark.autostock.config.JwtCore;
-import com.mark.autostock.dto.request.SigninRequest;
-import com.mark.autostock.dto.request.SignupRequest;
-import com.mark.autostock.dto.response.TokenRefreshResponse;
-import com.mark.autostock.dto.response.TokenResponse;
-import com.mark.autostock.entity.UserEntity;
+import com.mark.autostock.domain.dto.request.SigninRequest;
+import com.mark.autostock.domain.dto.request.SignupRequest;
+import com.mark.autostock.domain.dto.response.TokenRefreshResponse;
+import com.mark.autostock.domain.dto.response.TokenResponse;
+import com.mark.autostock.domain.entity.UserEntity;
 import com.mark.autostock.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

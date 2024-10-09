@@ -1,4 +1,4 @@
-package com.mark.autostock.dto.response;
+package com.mark.autostock.domain.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

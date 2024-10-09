@@ -1,6 +1,6 @@
 package com.mark.autostock.repository;
 
-import com.mark.autostock.entity.ClientEntity;
+import com.mark.autostock.domain.entity.ClientEntity;
 import com.mark.autostock.util.annotation.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,8 +1,8 @@
 package com.mark.autostock.service;
 
 
-import com.mark.autostock.dto.request.SigninRequest;
-import com.mark.autostock.dto.request.SignupRequest;
+import com.mark.autostock.domain.dto.request.SigninRequest;
+import com.mark.autostock.domain.dto.request.SignupRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;

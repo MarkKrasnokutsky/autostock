@@ -1,6 +1,6 @@
 package com.mark.autostock.controller;
 
-import com.mark.autostock.entity.AutomobileEntity;
+import com.mark.autostock.domain.dto.request.AutomobileRequest;
 import com.mark.autostock.service.impl.AutomobileServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +24,9 @@ public class AutomobileController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody AutomobileEntity automobileEntity) {
+    public ResponseEntity<?> add(@RequestBody AutomobileRequest req) {
         try {
-            return ResponseEntity.ok(automobileService.add(automobileEntity));
+            return ResponseEntity.ok(automobileService.add(req));
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");
@@ -34,9 +34,9 @@ public class AutomobileController {
     }
 
     @PutMapping("/change/{id}")
-    public ResponseEntity<?> change(@PathVariable Long id, @RequestBody AutomobileEntity automobileEntity) {
+    public ResponseEntity<?> change(@PathVariable Long id, @RequestBody AutomobileRequest req) {
         try {
-            return ResponseEntity.ok(automobileService.change(id, automobileEntity));
+            return ResponseEntity.ok(automobileService.change(id, req));
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");

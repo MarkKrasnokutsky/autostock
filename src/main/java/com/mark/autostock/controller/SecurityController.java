@@ -1,7 +1,7 @@
 package com.mark.autostock.controller;
 
-import com.mark.autostock.dto.request.SigninRequest;
-import com.mark.autostock.dto.request.SignupRequest;
+import com.mark.autostock.domain.dto.request.SigninRequest;
+import com.mark.autostock.domain.dto.request.SignupRequest;
 import com.mark.autostock.service.impl.SecurityServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

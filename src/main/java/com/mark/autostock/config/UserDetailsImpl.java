@@ -1,6 +1,6 @@
 package com.mark.autostock.config;
 
-import com.mark.autostock.entity.UserEntity;
+import com.mark.autostock.domain.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

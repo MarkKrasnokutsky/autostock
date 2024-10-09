@@ -1,7 +1,7 @@
 package com.mark.autostock.service.impl;
 
 import com.mark.autostock.config.UserDetailsImpl;
-import com.mark.autostock.entity.UserEntity;
+import com.mark.autostock.domain.entity.UserEntity;
 import com.mark.autostock.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

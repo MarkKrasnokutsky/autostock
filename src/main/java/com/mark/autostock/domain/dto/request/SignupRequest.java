@@ -1,4 +1,4 @@
-package com.mark.autostock.dto.request;
+package com.mark.autostock.domain.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
