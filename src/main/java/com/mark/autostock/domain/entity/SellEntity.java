@@ -2,6 +2,8 @@ package com.mark.autostock.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -10,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -48,4 +51,9 @@ public class SellEntity {
 
     @Column(name = "Статус_Оплаты", nullable = false, length = 45)
     private String status;
+
+    @JsonManagedReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "sell")
+    private List<PaymentEntity> payments;
 }
