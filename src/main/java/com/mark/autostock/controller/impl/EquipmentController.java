@@ -1,22 +1,23 @@
-package com.mark.autostock.controller;
+package com.mark.autostock.controller.impl;
 
-import com.mark.autostock.domain.dto.request.EmployerRequest;
-import com.mark.autostock.service.impl.EmployerServiceImpl;
+import com.mark.autostock.controller.CrudControllerI;
+import com.mark.autostock.domain.dto.request.EquipmentRequest;
+import com.mark.autostock.service.impl.EquipmentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
+@RequestMapping("api/v1/equipment")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-@RequestMapping("api/v1/employer")
-public class EmployerController {
-    private final EmployerServiceImpl employerService;
+@RequiredArgsConstructor
+public class EquipmentController implements CrudControllerI<EquipmentRequest, Long> {
+    private final EquipmentServiceImpl equipmentService;
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getAll() {
         try {
-            return ResponseEntity.ok(employerService.getAll());
+            return ResponseEntity.ok(equipmentService.getAll());
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");
@@ -24,9 +25,9 @@ public class EmployerController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody EmployerRequest req) {
+    public ResponseEntity<?> add(@RequestBody EquipmentRequest req) {
         try {
-            return ResponseEntity.ok(employerService.add(req));
+            return ResponseEntity.ok(equipmentService.add(req));
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");
@@ -34,9 +35,9 @@ public class EmployerController {
     }
 
     @PutMapping("/change/{id}")
-    public ResponseEntity<?> change(@PathVariable Long id, @RequestBody EmployerRequest req) {
+    public ResponseEntity<?> change(@PathVariable Long id, @RequestBody EquipmentRequest req) {
         try {
-            return ResponseEntity.ok(employerService.change(id, req));
+            return ResponseEntity.ok(equipmentService.change(id, req));
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");
@@ -46,7 +47,7 @@ public class EmployerController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
-            employerService.delete(id);
+            equipmentService.delete(id);
             return ResponseEntity.ok("Success deleted");
         }
         catch (Exception e) {

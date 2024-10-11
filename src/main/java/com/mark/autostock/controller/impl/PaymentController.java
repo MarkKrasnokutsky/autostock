@@ -1,22 +1,23 @@
-package com.mark.autostock.controller;
+package com.mark.autostock.controller.impl;
 
-import com.mark.autostock.domain.dto.request.SellRequest;
-import com.mark.autostock.service.impl.SellServiceImpl;
+import com.mark.autostock.controller.CrudControllerI;
+import com.mark.autostock.domain.dto.request.PaymentRequest;
+import com.mark.autostock.service.impl.PaymentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/sell")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@RequestMapping("api/v1/payment")
 @RequiredArgsConstructor
-public class SellController {
-    private final SellServiceImpl sellService;
+public class PaymentController implements CrudControllerI<PaymentRequest, Long> {
+    private final PaymentServiceImpl paymentService;
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getAll() {
         try {
-            return ResponseEntity.ok(sellService.getAll());
+            return ResponseEntity.ok(paymentService.getAll());
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");
@@ -24,9 +25,9 @@ public class SellController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody SellRequest req) {
+    public ResponseEntity<?> add(@RequestBody PaymentRequest req) {
         try {
-            return ResponseEntity.ok(sellService.add(req));
+            return ResponseEntity.ok(paymentService.add(req));
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");
@@ -34,9 +35,9 @@ public class SellController {
     }
 
     @PutMapping("/change/{id}")
-    public ResponseEntity<?> change(@PathVariable Long id, @RequestBody SellRequest req) {
+    public ResponseEntity<?> change(@PathVariable Long id, @RequestBody PaymentRequest req) {
         try {
-            return ResponseEntity.ok(sellService.change(id, req));
+            return ResponseEntity.ok(paymentService.change(id, req));
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");
@@ -46,7 +47,7 @@ public class SellController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
-            sellService.delete(id);
+            paymentService.delete(id);
             return ResponseEntity.ok("Success deleted");
         }
         catch (Exception e) {

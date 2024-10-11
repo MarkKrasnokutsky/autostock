@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -64,4 +65,9 @@ public class AutomobileEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "automobile")
     private List<SellEntity> sells; // Связь с продажами
+
+    @JsonManagedReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "automobile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<EquipmentRelEntity> equipmentRelEntities;
 }
