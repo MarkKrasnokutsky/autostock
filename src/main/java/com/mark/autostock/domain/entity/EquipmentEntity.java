@@ -1,11 +1,16 @@
 package com.mark.autostock.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,4 +33,9 @@ public class EquipmentEntity {
 
     @Column(name = "Кол-во", nullable = false)
     private Integer count;
+
+    @JsonManagedReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<EquipmentRelEntity> equipmentRelEntitySet; // Связь с оснащением
 }
