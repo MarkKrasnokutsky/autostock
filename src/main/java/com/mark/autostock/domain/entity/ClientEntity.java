@@ -38,4 +38,9 @@ public class ClientEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<SellEntity> sells; // Связь с продажами
+
+    @JsonManagedReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<TestDriveEntity> testDrives; // Связь с продажами
 }
