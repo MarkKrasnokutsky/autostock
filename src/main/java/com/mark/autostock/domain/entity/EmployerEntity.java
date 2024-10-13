@@ -41,4 +41,9 @@ public class EmployerEntity {
     @OneToMany(mappedBy = "employer")
     private List<SellEntity> sells; // Связь с продажами
 
+    @JsonManagedReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee")
+    private List<TestDriveEntity> testDrives; // Связь с продажами
+
 }

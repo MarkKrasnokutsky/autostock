@@ -70,4 +70,9 @@ public class AutomobileEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "automobile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<EquipmentRelEntity> equipmentRelEntities;
+
+    @JsonManagedReference
+    @JsonIgnore
+    @OneToMany(mappedBy = "auto")
+    private List<TestDriveEntity> testDrives; // Связь с продажами
 }
