@@ -1,5 +1,6 @@
 package com.mark.autostock.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -45,5 +46,10 @@ public class EmployerEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<TestDriveEntity> testDrives; // Связь с продажами
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "Id_Пользователя")
+    @JsonBackReference
+    private UserEntity user; // Связь с пользователем
 
 }

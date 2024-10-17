@@ -1,0 +1,1 @@
+INSERT INTO autostock.role (name) VALUES ('ADMIN'), ('EMPLOYER'), ('CLIENT');

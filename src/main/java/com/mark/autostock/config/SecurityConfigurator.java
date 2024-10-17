@@ -60,11 +60,10 @@ public class SecurityConfigurator {
                         httpSecurityCorsConfigurer.configurationSource(request -> {
                             CorsConfiguration configuration = new CorsConfiguration();
                             configuration.setAllowedOrigins(Arrays.asList(
-                                    "http://localhost:5173", "http://localhost:8080","http://profitpicks.ru/", "https://profitpicks.ru",
-                                    "https://147.45.164.252", "http://147.45.164.252")); // Разрешить корсы
-                            configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE", "PATCH")); // Разрешить все типы запросов
+                                    "http://localhost:5173", "http://localhost:8080"));
+                            configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE", "PATCH"));
                             configuration.setAllowCredentials(true);
-                            configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type")); // Разрешить только определенные заголовки
+                            configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
                             return configuration;
                         })
                 )
@@ -75,9 +74,13 @@ public class SecurityConfigurator {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                // TODO настроить права для эндПоинтов
+                // TODO донастроить защищенный роутинг
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/v1/auth/signup").permitAll()
+                        .requestMatchers("/api/v1/auth/signin").permitAll()
+                        .requestMatchers("/api/v1/employer/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/v1/preorder/**").hasAnyAuthority("ADMIN", "EMPLOYER")
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
