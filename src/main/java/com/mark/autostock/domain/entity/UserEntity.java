@@ -1,11 +1,14 @@
 package com.mark.autostock.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.management.relation.Role;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -32,11 +35,17 @@ public class UserEntity {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private EmployerEntity employer; // Связь с клиентом
 //    @Column(name = "reset_code", nullable = true, length = 6)
 //    @Schema(description = "Код для сброса пароля пользователя")
 //    private String resetCode;
 
-
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private RoleEntity role;
 
     @Override
     public String toString() {
