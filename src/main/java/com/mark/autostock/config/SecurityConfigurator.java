@@ -76,12 +76,26 @@ public class SecurityConfigurator {
                 )
                 // TODO донастроить защищенный роутинг
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/v1/auth/signup").permitAll()
-                        .requestMatchers("/api/v1/auth/signin").permitAll()
-                        .requestMatchers("/api/v1/employer/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/v1/preorder/**").hasAnyAuthority("ADMIN", "EMPLOYER")
+                        // Эндпоинты без аутентификации
+                        .requestMatchers("/api/v1/auth/signin", "/api/v1/auth/signup").permitAll()
+
+                        .requestMatchers("/api/v1/auth/role/**", "/api/v1/auth/refresh_token", "/api/v1/user/**").hasAuthority("ADMIN") // Добавили правила для этих маршрутов
+
+                        // Эндпоинты для CLIENT
+                        .requestMatchers("/api/v1/preorder/add", "/api/v1/testdrive/add").hasAnyAuthority("CLIENT", "ADMIN", "EMPLOYER")
+
+                        // Эндпоинт для GUEST (только просмотр всех автомобилей)
+                        .requestMatchers("/api/v1/auto/getAll").hasAnyAuthority("CLIENT", "GUEST", "ADMIN", "EMPLOYER")
+
+                        // Эндпоинты для EMPLOYER
+                        .requestMatchers("/api/v1/auto/**", "/api/v1/client/**", "/api/v1/sell/**",
+                                "/api/v1/payment/**", "/api/v1/equipment/**", "/api/v1/equipmentRel/**",
+                                "/api/v1/testdrive/**", "/api/v1/preorder/**").hasAnyAuthority("EMPLOYER", "ADMIN")
+
+                        // Все остальные запросы требуют аутентификации
                         .anyRequest().authenticated()
                 )
+
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

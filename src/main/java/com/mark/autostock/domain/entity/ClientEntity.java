@@ -1,5 +1,6 @@
 package com.mark.autostock.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -48,4 +49,9 @@ public class ClientEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<PreOrderEntity> preOrders; // Связь с предзаказами
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "Id_Пользователя")
+    @JsonBackReference
+    private UserEntity user; // Связь с пользователем
 }

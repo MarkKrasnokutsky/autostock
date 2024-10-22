@@ -27,5 +27,5 @@ public class RoleEntity {
     @JsonManagedReference
     @JsonIgnore
     @OneToMany(mappedBy = "role")
-    private List<UserEntity> users; // Связь с продажами
+    private List<UserEntity> users; // Связь с пользователями
 }
