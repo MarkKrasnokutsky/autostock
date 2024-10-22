@@ -22,4 +22,14 @@ CREATE TABLE `autostock`.`сотрудник` (
                                          Id_Пользователя BIGINT,
                                          CHECK (`Зарплата` > 0),
                                          PRIMARY KEY (`Код_Сотрудника`),
-                                             CONSTRAINT FK_Клиент_Пользователь FOREIGN KEY (`Id_Пользователя`) REFERENCES autostock.user(id));
+                                             CONSTRAINT FK_Сотрудник_Пользователь FOREIGN KEY (`Id_Пользователя`) REFERENCES autostock.user(id));
+
+CREATE TABLE autostock.`клиент` (
+                                    `Код_Клиента` INT NOT NULL AUTO_INCREMENT,
+                                    `ФИО_клиента` VARCHAR(256) NOT NULL,
+                                    `Номер_Телефона` VARCHAR(12) NOT NULL,
+                                    `Дата_Рождения` DATE NOT NULL,
+                                    Id_Пользователя BIGINT,
+                                    PRIMARY KEY (`Код_Клиента`),
+                                    UNIQUE (`Номер_Телефона`),
+                                    CONSTRAINT FK_Клиент_Пользователь FOREIGN KEY (`Id_Пользователя`) REFERENCES autostock.user(id));

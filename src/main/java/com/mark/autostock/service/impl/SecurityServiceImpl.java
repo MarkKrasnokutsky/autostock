@@ -1,11 +1,19 @@
 package com.mark.autostock.service.impl;
 
 import com.mark.autostock.config.JwtCore;
+import com.mark.autostock.domain.dto.request.PaymentRequest;
+import com.mark.autostock.domain.dto.request.RoleRequest;
 import com.mark.autostock.domain.dto.request.SigninRequest;
 import com.mark.autostock.domain.dto.request.SignupRequest;
+import com.mark.autostock.domain.dto.response.PaymentResponse;
+import com.mark.autostock.domain.dto.response.RoleResponse;
 import com.mark.autostock.domain.dto.response.TokenRefreshResponse;
 import com.mark.autostock.domain.dto.response.TokenResponse;
+import com.mark.autostock.domain.entity.PaymentEntity;
+import com.mark.autostock.domain.entity.RoleEntity;
+import com.mark.autostock.domain.entity.SellEntity;
 import com.mark.autostock.domain.entity.UserEntity;
+import com.mark.autostock.repository.RoleRepository;
 import com.mark.autostock.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -35,6 +43,8 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,6 +58,7 @@ public class SecurityServiceImpl {
     @Value("${jwt-token.refresh-lifetime}")
     private int refreshTokenLifetime;
     private UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int CODE_LENGTH = 6;
@@ -95,6 +106,8 @@ public class SecurityServiceImpl {
         userEntity.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
         ZonedDateTime moscowTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow"));
         userEntity.setCreatedAt(moscowTime.toLocalDateTime());
+        Optional<RoleEntity> defaultRole = roleRepository.findById(4L);
+        userEntity.setRole(defaultRole.get());
         userRepository.save(userEntity);
         return ResponseEntity.ok("Added user successfully");
     }
@@ -167,5 +180,55 @@ public class SecurityServiceImpl {
         } catch (JwtException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh token is invalid");
         }
+    }
+
+    public List<RoleResponse> getAllRoles() {
+        List<RoleResponse> roleResList = new ArrayList<>();
+        List<RoleEntity> entities = roleRepository.findAll();
+        for (RoleEntity entity : entities){
+            RoleResponse roleRes = RoleResponse
+                    .builder()
+                    .id(entity.getId())
+                    .name(entity.getName())
+                    .build();
+            roleResList.add(roleRes);
+        }
+        return roleResList;
+    }
+
+    public RoleResponse getRoleById(Long id) {
+        RoleEntity entity = roleRepository.findById(id).orElse(null);
+        return RoleResponse
+                .builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .build();
+    }
+
+    public RoleResponse addRole(RoleRequest req) {
+        RoleEntity entity = new RoleEntity();
+        entity.setName(req.getName());
+        roleRepository.save(entity);
+        return RoleResponse
+                .builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .build();
+    }
+
+    public void deleteRole(Long id) {
+        RoleEntity entity = roleRepository.findById(id).get();
+        roleRepository.delete(entity);
+    }
+
+    public RoleResponse changeRole(Long id, RoleRequest req) {
+        RoleEntity entity = roleRepository.findById(id).get();
+        entity.setName(req.getName());
+        roleRepository.save(entity);
+        return RoleResponse
+                .builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .build();
     }
 }

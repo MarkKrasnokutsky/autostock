@@ -37,7 +37,11 @@ public class UserEntity {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private EmployerEntity employer; // Связь с клиентом
+    private EmployerEntity employer; // Связь с сотрудником
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private ClientEntity client; // Связь с клиентом
 //    @Column(name = "reset_code", nullable = true, length = 6)
 //    @Schema(description = "Код для сброса пароля пользователя")
 //    private String resetCode;

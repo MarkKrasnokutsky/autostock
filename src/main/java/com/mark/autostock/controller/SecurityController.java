@@ -8,15 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequiredArgsConstructor
 public class SecurityController {
     private final SecurityServiceImpl securityServiceImpl;
@@ -34,5 +32,25 @@ public class SecurityController {
     @PostMapping("/refresh_token")
     public ResponseEntity<?> refresh(HttpServletRequest request, HttpServletResponse response) {
         return securityServiceImpl.refresh(request, response);
+    }
+
+    @GetMapping("/role/get/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(securityServiceImpl.getRoleById(id));
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error");
+        }
+    }
+
+    @GetMapping("/role/getAll")
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            return ResponseEntity.ok(securityServiceImpl.getAllRoles());
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error");
+        }
     }
 }

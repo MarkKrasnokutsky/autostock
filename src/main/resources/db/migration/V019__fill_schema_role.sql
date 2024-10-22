@@ -1,1 +1,1 @@
-INSERT INTO autostock.role (name) VALUES ('ADMIN'), ('EMPLOYER'), ('CLIENT');
+INSERT INTO autostock.role (id, name) VALUES (1,'ADMIN'), (2,'EMPLOYER'), (3,'CLIENT'), (4, 'GUEST');
